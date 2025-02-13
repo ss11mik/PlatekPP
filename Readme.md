@@ -4,7 +4,7 @@ Individuální statistiky stravování v menzách VUT.
 
 ## Import dat
 
-V systému ISKAM (v případě VUT https://www.skm.vutbr.cz/app05/IsKAM/InformaceOKlientovi) zobrazit výpis z Hlavního konta, nastavit parametr "od" tak, aby pokrýval celé studium a stáhnout dataset tlačítkem "Export do Excelu". Stažený soubor vložit do podsložky 'dataset/' a předat jako parametr skriptu.
+V systému ISKAM (v případě VUT https://www.skm.vutbr.cz/app05/IsKAM/InformaceOKlientovi) zobrazit výpis z Hlavního konta, nastavit parametr "od" tak, aby pokrýval celé studium a stáhnout dataset tlačítkem "Export do Excelu". Stažený soubor vložit do podsložky `dataset/` a předat jako parametr skriptu.
 
 
 ## Spuštění
@@ -17,7 +17,7 @@ python platek.py dataset/ISKaM4_ss11mik_HLA.xlsx
 
 ## Výstup
 
-Grafy a statistiky jsou uloženy v podsložce 'out/'
+Grafy a statistiky jsou uloženy v podsložce `out/`
 
 ### Grafy
 - dny.png - histogram placení v menze dle dnů.
@@ -41,4 +41,4 @@ Grafy a statistiky jsou uloženy v podsložce 'out/'
 - informaci o tom, ve které menze transakce proběhla, není možné z ISKAMu dostat.
 - z výpisu není možné rozlišit hlavní jídlo, menu a přílohu jinak, než manuálně vytvořeným seznamem (viz zdrojový kód).
 - obědové menu je vedeno pouze jako "Menu R 1" / "Menu R 2", takže jej nelze správně započítat do statistik mas, příloh atd.
-- vzorkování dat v některých grafech je provedeno podle magické konstanty (např. 'plt.hist(casy, bins=128)'), kterou je možné libovolně měnit.
+- vzorkování dat v některých grafech je provedeno podle magické konstanty (např. `plt.hist(casy, bins=128)`), kterou je možné libovolně měnit.
