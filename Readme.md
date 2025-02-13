@@ -4,7 +4,7 @@ Individuální statistiky stravování v menzách VUT.
 
 ## Import dat
 
-V systému ISKAM (v případě VUT https://www.skm.vutbr.cz/app05/IsKAM/InformaceOKlientovi) zobrazit výpis z Hlavního konta, nastavit parametr "od" tak, aby pokrýval celé studium a stáhnout dataset tlačítkem "Export do Excelu". Stažený soubor vložit do podsložky `dataset/` a předat jako parametr skriptu.
+V systému ISKAM (v případě VUT https://www.skm.vutbr.cz/app05/IsKAM/InformaceOKlientovi) je potřeba nejprve přepnout rozhraní do angličtiny. Následně zobrazit výpis z Hlavního konta, nastavit parametr "od" tak, aby pokrýval celé studium a stáhnout dataset tlačítkem "Export do Excelu". Stažený soubor vložit do podsložky `dataset/` a předat jako parametr skriptu.
 
 
 ## Spuštění
