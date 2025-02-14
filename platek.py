@@ -95,10 +95,10 @@ def parse_vydaje(dataset):
     dataset = filter_payments(dataset)
     ubytovani     = filter_matching_descr(dataset, ["Ubytování"])
     kolejnet      = filter_matching_descr(dataset, ["Služba CVIS", "internet"])
-    tisk          = filter_matching_descr(dataset, ["Print"])
+    tisk          = filter_matching_descr(dataset, ["Print", "Tisky a kopie"])
     prani         = filter_matching_descr(dataset, ["Praní"])
-    menza_hlavni  = filter_matching_descr(dataset, seznam_nejidel + seznam_priloh, negative=True)
-    menza_prilohy = filter_matching_descr(dataset, seznam_priloh)
+    menza_hlavni  = filter_matching_descr(dataset, seznam_nejidel + seznam_priloh + seznam_dezertu + seznam_napoju, negative=True)
+    menza_prilohy = filter_matching_descr(dataset, seznam_priloh + seznam_dezertu + seznam_napoju)
 
 
     return menza_hlavni["Payments"], menza_prilohy["Payments"], ubytovani["Payments"], kolejnet["Payments"], tisk["Payments"], prani["Payments"]
@@ -157,11 +157,17 @@ seznam_jidel = [
     "Kynuté knedlíky",
     "Tvarohové knedlíky",
     "Alpský knedlík",
-    "Letenský flamendr"
+    "flamendr",
+    "Čevapčiči",
+    "Paella",
+    "hradní dlabanec",
+    "Tortilla",
+    "špíz"
 ]
 
 seznam_nejidel = [
     "platba",
+    "SafeQ",
     "převod",
     "ubytování",
     "hotovost",
@@ -169,9 +175,12 @@ seznam_nejidel = [
     "praní",
     "internet",
     "print",
+    "Tisky a kopie",
     "sleva",
     "služba",
-    "vklad"
+    "vklad",
+    "Krabice na pizzu",
+    "Obal"
 ]
 
 seznam_priloh = [
@@ -187,6 +196,26 @@ seznam_priloh = [
     "Těstoviny M"           # " M" pro odliseni od hlavnich jidlel napr. "Těstoviny po italsku"
 ]
 
+seznam_dezertu = [
+    "Dort malakov",
+    "Dort Sacher 70g",
+    "Dort pohádka",
+    "Kostka ovocná s tvarohem",
+    "Větrník střední",
+    "Dezert Panna Cotta",
+    "Dort jogurtový 60g",
+    "Věneček žloutkový",
+    "Roláda čokoládová 60g",
+    "Kostka jahodová 50g",
+    "Pudink s ovocem a šlehačkou"
+]
+
+seznam_napoju = [
+    "Rajec 0,75l",
+    "Post Kofola 0,3l",
+    "Post Kofola 0,5l"
+]
+
 seznam_mas = [
     "Kuře",     # match "Kuře na" / "Kuřecí" / ...
     "Vepř",     # match "Vepřové" / "Vepřový" / ...
@@ -198,7 +227,9 @@ seznam_mas = [
     "Klokan",
     "Sójové",
     "Krkovička",    # TODO započítat do vepřového
-    "Robi"
+    "Robi",
+    "Kachna",
+    "Losos"
 ]
 
 dny_v_tydnu = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
@@ -220,6 +251,9 @@ if __name__ == '__main__':
     jidla, jidla_counts = parse(popisy, seznam_jidel)
     platky, platky_counts = parse(popisy, ["plátek"], replace=False)
     steaky, steaky_counts = parse(popisy, ["steak"], replace=False)
+    pizzy, pizzy_counts = parse(popisy, ["pizza"], replace=False)
+    polevky, polevky_counts = parse(popisy, ["Polévka"], replace=False)
+    dezerty, dezerty_counts = parse(popisy, seznam_dezertu, replace=False)
     prilohy, prilohy_counts = parse(popisy, seznam_priloh)
     casy = parse_casy(data)
     dny = parse_dny(data)
@@ -252,6 +286,14 @@ if __name__ == '__main__':
 
 
     pd.DataFrame({"Pocet": steaky_counts, "Druh steaku": steaky}).sort_values(by=['Pocet'], ascending=False).to_csv(os.path.join('out', 'steaky.csv'), index=None, sep=' ')
+
+
+    pd.DataFrame({"Pocet": pizzy_counts, "Druh pizzy": pizzy}).sort_values(by=['Pocet'], ascending=False).to_csv(os.path.join('out', 'pizzy.csv'), index=None, sep=' ')
+
+
+    pd.DataFrame({"Pocet": polevky_counts, "Druh polévky": polevky}).sort_values(by=['Pocet'], ascending=False).to_csv(os.path.join('out', 'polevky.csv'), index=None, sep=' ')
+
+    pd.DataFrame({"Pocet": dezerty_counts, "Druh dezertu": dezerty}).sort_values(by=['Pocet'], ascending=False).to_csv(os.path.join('out', 'dezerty.csv'), index=None, sep=' ')
 
 
     fig, ax = plt.subplots()
