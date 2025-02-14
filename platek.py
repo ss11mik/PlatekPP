@@ -243,6 +243,8 @@ if __name__ == '__main__':
     #
     data = pd.read_excel(sys.argv[1])
     popisy = data.loc[:, "Description"]
+    os.makedirs('out', exist_ok=True)
+
 
     #
     # parse data
