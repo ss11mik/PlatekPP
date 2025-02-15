@@ -96,7 +96,7 @@ def parse_vydaje(dataset):
     ubytovani     = filter_matching_descr(dataset, ["Ubytování"])
     kolejnet      = filter_matching_descr(dataset, ["Služba CVIS", "internet"])
     tisk          = filter_matching_descr(dataset, ["Print", "Tisky a kopie"])
-    prani         = filter_matching_descr(dataset, ["Praní"])
+    prani         = filter_matching_descr(dataset, ["Praní", "Sušení"])
     menza_hlavni  = filter_matching_descr(dataset, seznam_nejidel + seznam_priloh + seznam_dezertu + seznam_napoju, negative=True)
     menza_prilohy = filter_matching_descr(dataset, seznam_priloh + seznam_dezertu + seznam_napoju)
 
@@ -157,12 +157,16 @@ seznam_jidel = [
     "Kynuté knedlíky",
     "Tvarohové knedlíky",
     "Alpský knedlík",
-    "flamendr",
+    "Flamendr",
     "Čevapčiči",
     "Paella",
-    "hradní dlabanec",
+    "Hradní dlabanec",
     "Tortilla",
-    "špíz"
+    "Špíz",
+    "Bramborák",
+    "Květák",
+    "Žebra",
+    "Ražniči"
 ]
 
 seznam_nejidel = [
@@ -173,6 +177,7 @@ seznam_nejidel = [
     "hotovost",
     "penále",
     "praní",
+    "Sušení",
     "internet",
     "print",
     "Tisky a kopie",
@@ -180,6 +185,7 @@ seznam_nejidel = [
     "služba",
     "vklad",
     "Krabice na pizzu",
+    "Obal pod pizzu",
     "Obal"
 ]
 
@@ -188,6 +194,7 @@ seznam_priloh = [
     "Brambory maštěné máslem",
     "Brambory opečené",
     "Brambory vařené",
+    "Brambory šťouchané",
     "Bramborová kaše",
     "Bramboráčky 4ks",
     "Rýže Jasmínová",
@@ -213,7 +220,8 @@ seznam_dezertu = [
 seznam_napoju = [
     "Rajec 0,75l",
     "Post Kofola 0,3l",
-    "Post Kofola 0,5l"
+    "Post Kofola 0,5l",
+    "MY Tea 0,5l"
 ]
 
 seznam_mas = [
