@@ -25,7 +25,7 @@ Grafy a statistiky jsou uloženy v podsložce `out/`
 - masa.png - četnost druhů mas v objednávaných jídlech.
 - prilohy.png - četnost různých příloh. Nezapočítává přílohy v rámci menu (viz poznámky).
 - tydny.png - průměrný počet návštěv menzy v daném týdnu napříč roky. Zobrazuje různá období, jako začátek semestru, zkouškové období, prázdniny. Indexování podle kalendářního týdne. Zelená čára značí celkový průměr.
-- vydaje.png - rozdělení výdajů z konta na ubytování, hlavní jídla v menze, přílohy (zahrnuje i dezerty a nápoje), KolejNet, praní a tisk.
+- vydaje.png - rozdělení výdajů z konta na ubytování, hlavní jídla v menze, přílohy (zahrnuje i dezerty a nápoje), KolejNet, praní (včetně sušení) a tisk.
 - casy.png - histogram časů placení v menze.
 - casy_v_tydnu.png - histogram časů placení v menze, samostatně pro každý den v týdnu.
 - zustatek.png - graf zůstatku na kontě s vyznačenou průměrnou hodnotou.
