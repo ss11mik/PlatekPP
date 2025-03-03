@@ -200,7 +200,8 @@ seznam_priloh = [
     "Rýže Jasmínová",
     "Hranolky",
     "Knedlíky houskové",
-    "Těstoviny M"           # " M" pro odliseni od hlavnich jidlel napr. "Těstoviny po italsku"
+    "Těstoviny M",           # " M" pro odliseni od hlavnich jidlel napr. "Těstoviny po italsku"
+    "Bramborové krokety"
 ]
 
 seznam_dezertu = [
