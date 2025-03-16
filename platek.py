@@ -35,6 +35,19 @@ def parse(dataset, seznam, replace=True):
         for elem in seznam:
             x.loc[x.str.lower().str.contains(elem.lower())] = elem
 
+    # split rows of menu items and keep only relevant
+    y = []
+    for row in x:
+        menu_items = row.split('\n')
+        if len(menu_items) > 1:
+            for menu_item in menu_items:
+                for searched in seznam:
+                    if searched.lower() in menu_item.lower():
+                        y += [menu_item]
+        else:
+            y += [row]
+    x = pd.Series(y)
+
     labels, counts = np.unique(x, return_counts=True)
     count_sort_ind = np.argsort(counts)
 
@@ -83,6 +96,7 @@ def parse_tydny(dataset):
 
 def parse_inflace(dataset, polozka):
     dataset = filter_matching_descr(dataset, [polozka])
+    dataset = filter_matching_descr(dataset, ["Menu"], negative=True)
 
     cena = dataset.loc[:, "Payments"]
     datum = dataset.loc[:, "Billed"]
@@ -97,11 +111,16 @@ def parse_vydaje(dataset):
     kolejnet      = filter_matching_descr(dataset, ["Služba CVIS", "internet"])
     tisk          = filter_matching_descr(dataset, ["Print", "Tisky a kopie"])
     prani         = filter_matching_descr(dataset, ["Praní", "Sušení"])
-    menza_hlavni  = filter_matching_descr(dataset, seznam_nejidel + seznam_priloh + seznam_dezertu + seznam_napoju, negative=True)
-    menza_prilohy = filter_matching_descr(dataset, seznam_priloh + seznam_dezertu + seznam_napoju)
+    menza_hlavni  = filter_matching_descr(dataset, seznam_jidel)
+    menza_hlavni  = filter_matching_descr(menza_hlavni, ["Menu"], negative=True)
+    menza_prilohy = filter_matching_descr(dataset, seznam_priloh)
+    menza_prilohy = filter_matching_descr(menza_prilohy, ["Menu"], negative=True)
+    menza_napoje  = filter_matching_descr(dataset, seznam_napoju)
+    menza_dezerty = filter_matching_descr(dataset, seznam_dezertu)
+    menza_menu    = filter_matching_descr(dataset, ["Menu"])
 
 
-    return menza_hlavni["Payments"], menza_prilohy["Payments"], ubytovani["Payments"], kolejnet["Payments"], tisk["Payments"], prani["Payments"]
+    return menza_hlavni["Payments"], menza_prilohy["Payments"], menza_menu["Payments"], menza_napoje["Payments"], menza_dezerty["Payments"], ubytovani["Payments"], kolejnet["Payments"], tisk["Payments"], prani["Payments"]
 
 
 def parse_balance(data):
@@ -122,6 +141,7 @@ def parse_balance(data):
 
 
 seznam_jidel = [
+    "Menu",
     "Guláš",
     "Těstoviny",    # TODO Penne
     "Plátek",
@@ -136,7 +156,6 @@ seznam_jidel = [
     "Kaše",         # TODO ne bramborova
     "Směs",
     "Smažený sýr",
-    "Menu",
     "Palačinky",
     "Pizza",
     "Polévka",
@@ -373,8 +392,8 @@ if __name__ == '__main__':
     sumy_vydaju = [vydaj.sum() for vydaj in vydaje]
     celkova_suma_vydaju = sum(sumy_vydaju)
     fig, ax = plt.subplots()
-    plt.title("Výdaje z ISKAM účtu")
-    labels = ['{} - {:,.0f} Kč'.format(i, j) for i, j in zip(['hlavní jídla', 'přílohy', 'ubytování', 'KolejNet', 'tisk', 'praní'], sumy_vydaju)]
+    plt.title("Výdaje z KaM účtu")
+    labels = ['{} - {:,.0f} Kč'.format(i, j) for i, j in zip(['hlavní jídla', 'přílohy', 'menu', 'nápoje', 'dezerty', 'ubytování', 'KolejNet', 'tisk', 'praní'], sumy_vydaju)]
     patches, texts = ax.pie(sumy_vydaju)
     plt.legend(patches, labels)
     save(plt, 'vydaje.png')
