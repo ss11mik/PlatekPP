@@ -406,6 +406,6 @@ if __name__ == '__main__':
     plt.ylabel("Zůstatek na kontě")
     plt.xlabel("čas")
     plt.title("Zůstatek na kontě [Kč]")
-    ax.axhline(data["Balance"].mean(), colour='green')
+    ax.axhline(data["Balance"].mean(), color='green')
     plt.plot(date_list, balance)
     save(plt, 'zustatek.png')
