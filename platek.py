@@ -111,6 +111,7 @@ def parse_vydaje(dataset):
     kolejnet      = filter_matching_descr(dataset, ["Služba CVIS", "internet"])
     tisk          = filter_matching_descr(dataset, ["Print", "Tisky a kopie"])
     prani         = filter_matching_descr(dataset, ["Praní", "Sušení"])
+    penale        = filter_matching_descr(dataset, ["Penále"])
     menza_hlavni  = filter_matching_descr(dataset, seznam_jidel)
     menza_hlavni  = filter_matching_descr(menza_hlavni, ["Menu"], negative=True)
     menza_prilohy = filter_matching_descr(dataset, seznam_priloh)
@@ -120,7 +121,7 @@ def parse_vydaje(dataset):
     menza_menu    = filter_matching_descr(dataset, ["Menu"])
 
 
-    return menza_hlavni["Payments"], menza_prilohy["Payments"], menza_menu["Payments"], menza_napoje["Payments"], menza_dezerty["Payments"], ubytovani["Payments"], kolejnet["Payments"], tisk["Payments"], prani["Payments"]
+    return menza_hlavni["Payments"], menza_prilohy["Payments"], menza_menu["Payments"], menza_napoje["Payments"], menza_dezerty["Payments"], ubytovani["Payments"], kolejnet["Payments"], tisk["Payments"], prani["Payments"], penale["Payments"]
 
 
 def parse_balance(data):
@@ -205,7 +206,8 @@ seznam_nejidel = [
     "vklad",
     "Krabice na pizzu",
     "Obal pod pizzu",
-    "Obal"
+    "Obal",
+    "Penále"
 ]
 
 seznam_priloh = [
@@ -393,7 +395,7 @@ if __name__ == '__main__':
     celkova_suma_vydaju = sum(sumy_vydaju)
     fig, ax = plt.subplots()
     plt.title("Výdaje z KaM účtu")
-    labels = ['{} - {:,.0f} Kč'.format(i, j) for i, j in zip(['hlavní jídla', 'přílohy', 'menu', 'nápoje', 'dezerty', 'ubytování', 'KolejNet', 'tisk', 'praní'], sumy_vydaju)]
+    labels = ['{} - {:,.0f} Kč'.format(i, j) for i, j in zip(['hlavní jídla', 'přílohy', 'menu', 'nápoje', 'dezerty', 'ubytování', 'KolejNet', 'tisk', 'praní', 'penále'], sumy_vydaju)]
     patches, texts = ax.pie(sumy_vydaju)
     plt.legend(patches, labels)
     save(plt, 'vydaje.png')
@@ -404,6 +406,6 @@ if __name__ == '__main__':
     plt.ylabel("Zůstatek na kontě")
     plt.xlabel("čas")
     plt.title("Zůstatek na kontě [Kč]")
-    ax.axhline(data["Balance"].mean(), color='green')
+    ax.axhline(data["Balance"].mean(), colour='green')
     plt.plot(date_list, balance)
     save(plt, 'zustatek.png')
