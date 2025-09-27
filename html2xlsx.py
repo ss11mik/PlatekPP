@@ -1,17 +1,14 @@
 # HTML2XLSX pro Platek++;
 #  Převod tabulky z webu na XLSX kompatibilní s Platek++;
-# použití: python html2xlsx.py dataset/ISKAM.html dataset/ISKAM.xlsx
+# použití: python html2xlsx.py dataset/ISKAM.html dataset/ISKAM.xlsx [kódování vstupního souboru]
 # autor: ss11mik
 # 2025
 
 import pandas as pd
-import re
 import sys
-import math
 from bs4 import BeautifulSoup
-
-
-with open(sys.argv[1], 'r') as file:
+    
+with open(sys.argv[1], 'r', encoding=sys.argv[3] if len(sys.argv) > 3 else 'utf-8') as file:
     soup = BeautifulSoup(file.read(), features="html.parser")
 
 table = soup.find('table', attrs={'id':'tablePrevodyUhrady'})
