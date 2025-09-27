@@ -268,6 +268,10 @@ dny_v_tydnu_cs = ['pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek']
 
 
 if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print("Usage: python platek.py <input xlsx file>")
+        sys.exit(1)
+    
     #
     # load data
     #

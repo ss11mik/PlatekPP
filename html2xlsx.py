@@ -4,8 +4,14 @@
 # autor: ss11mik
 # 2025
 
-import pandas as pd
 import sys
+
+if len(sys.argv) < 3:
+    print("Usage: python html2xlsx.py <input html file> <output xlsx file> [encoding of input file, default utf-8]")
+    sys.exit(1)
+
+
+import pandas as pd
 from bs4 import BeautifulSoup
     
 with open(sys.argv[1], 'r', encoding=sys.argv[3] if len(sys.argv) > 3 else 'utf-8') as file:

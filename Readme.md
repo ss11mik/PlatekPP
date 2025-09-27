@@ -4,13 +4,15 @@ Individuální statistiky stravování v menzách VUT.
 
 ## Import dat
 
-V systému ISKAM (v případě VUT https://www.skm.vutbr.cz/app05/IsKAM/InformaceOKlientovi) je potřeba nejprve přepnout rozhraní do angličtiny. Následně zobrazit výpis z Hlavního konta, nastavit parametr "od" tak, aby pokrýval celé studium.
+V systému ISKAM (v případě VUT https://www.skm.vutbr.cz/app05/IsKAM/InformaceOKlientovi) je potřeba nejprve *přepnout rozhraní do angličtiny*. Následně zobrazit výpis z Hlavního konta, nastavit parametr "od" tak, aby pokrýval celé studium.
 
 ### Import HTML
-Stáhnout webovou stránku s tabulkou a uložit jako HTML soubor. Konvertovat přiloženým skriptem na XLSX:
+Stáhnout webovou stránku s tabulkou a uložit jako HTML soubor. Konvertovat přiloženým skriptem na XLSX například takto:
 ```
 python html2xlsx.py ISKAM.html ISKAM.xlsx
 ```
+
+Pokud vstupní soubor není utf-8, je potřeba zadat kodování. Např.: `python html2xlsx.py ISKAM.html ISKAM.xlsx cp1250`
 
 ### Import XLSX
 Stačí stáhnout dataset tlačítkem "Export do Excelu". Stažený soubor předat jako parametr skriptu.
